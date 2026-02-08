@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Broccoli 2026 | Здоровая гастрономия в Ташкенте</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0fdf4', 400: '#4ade80', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' },
+                        dark: '#0f172a'
+                    },
+                    fontFamily: { sans: ['Manrope', 'sans-serif'], serif: ['Playfair Display', 'serif'] }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .hero-bg {
+            background-image: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.6)), url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-position: center; background-attachment: fixed;
+        }
+        .masonry-grid { column-count: 1; column-gap: 1.5rem; }
+        @media (min-width: 640px) { .masonry-grid { column-count: 2; } }
+        @media (min-width: 1024px) { .masonry-grid { column-count: 3; } }
+        .masonry-item { break-inside: avoid; margin-bottom: 1.5rem; }
+        .fade-up { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+        .gallery-overlay { background: linear-gradient(to top, rgba(15,23,42,0.9) 0%, rgba(15,23,42,0) 100%); }
+    </style>
+</head>
+<body class="bg-stone-50 text-slate-800 antialiased">
+
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-4 top-0">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="bg-white/95 backdrop-blur-md rounded-full px-6 py-3 border border-white/50 shadow-lg flex justify-between items-center">
+                <a href="#" class="flex items-center gap-2">
+                    <div class="bg-brand-500 text-white p-2 rounded-full"><i data-lucide="sprout" class="w-5 h-5"></i></div>
+                    <span class="font-bold text-xl tracking-tight text-dark">Broccoli</span>
+                </a>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#about" class="text-sm font-semibold hover:text-brand-600 uppercase tracking-wide">О нас</a>
+                    <a href="#menu" class="text-sm font-semibold hover:text-brand-600 uppercase tracking-wide">Меню</a>
+                    <a href="#gallery" class="text-sm font-semibold hover:text-brand-600 uppercase tracking-wide">Галерея</a>
+                    <a href="#calculator" class="text-sm font-semibold hover:text-brand-600 uppercase tracking-wide">КБЖУ</a>
+                    <a href="#reviews" class="text-sm font-semibold hover:text-brand-600 uppercase tracking-wide">Отзывы</a>
+                </div>
+                <button onclick="openDelivery()" class="flex items-center gap-2 px-6 py-2 bg-brand-500 text-white rounded-full font-bold hover:bg-brand-600 transition-all text-sm shadow-lg">
+                    <i data-lucide="bike" class="w-4 h-4"></i> Доставка
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <header class="relative h-screen flex items-center justify-center text-center hero-bg">
+        <div class="relative z-10 px-4 max-w-4xl">
+            <div class="inline-block px-4 py-1 mb-6 border border-brand-400/30 rounded-full bg-brand-900/40 text-brand-50 text-xs font-bold uppercase tracking-widest">
+                Est. 2026 • Tashkent City
+            </div>
+            <h1 class="text-5xl md:text-8xl font-serif text-white mb-6">Вкус <span class="text-brand-400 italic">качества</span></h1>
+            <p class="text-lg md:text-xl text-slate-200 mb-10 font-light max-w-2xl mx-auto">
+                Здоровая еда может быть высокой кухней. Чистые ингредиенты и честный расчет КБЖУ в каждом блюде.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#menu" class="px-8 py-4 bg-brand-500 text-white rounded-2xl font-bold hover:bg-brand-600 shadow-xl">Смотреть меню</a>
+                <button onclick="openDelivery()" class="px-8 py-4 bg-white/10 backdrop-blur-md text-white border border-white/20 rounded-2xl font-bold hover:bg-white hover:text-dark transition-all">Заказать доставку</button>
+            </div>
+        </div>
+    </header>
+
+    <section id="about" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-16 items-center mb-24 fade-up">
+                <div class="relative group">
+                    <div class="aspect-[3/4] rounded-[2.5rem] overflow-hidden shadow-2xl">
+                        <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover">
+                    </div>
+                    <div class="absolute -bottom-8 -right-8 bg-white p-8 rounded-[2rem] shadow-xl max-w-xs border border-slate-100 hidden md:block">
+                        <p class="font-serif italic text-lg text-slate-700">"Еда — это энергия. Мы делаем её чистой."</p>
+                    </div>
+                </div>
+                <div class="space-y-6">
+                    <span class="text-brand-600 font-bold uppercase tracking-widest text-sm bg-brand-50 px-3 py-1 rounded-full">Бренд-шеф</span>
+                    <h3 class="text-5xl font-serif font-bold text-dark">Алессандро Моретти</h3>
+                    <p class="text-slate-600 text-lg leading-relaxed">
+                        Наш шеф привез в Ташкент философию честного продукта. Мы используем метод Су-вид и фермерские поставки, чтобы вы получали максимум пользы без лишнего жира и сахара.
+                    </p>
+                    <div class="flex gap-8 pt-4">
+                        <div><p class="text-3xl font-bold text-brand-500">15+</p><p class="text-sm text-slate-400">Лет опыта</p></div>
+                        <div><p class="text-3xl font-bold text-brand-500">100%</p><p class="text-sm text-slate-400">Органика</p></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-16 items-center fade-up">
+                <div class="order-2 lg:order-1 space-y-6">
+                    <span class="text-brand-600 font-bold uppercase tracking-widest text-sm bg-brand-50 px-3 py-1 rounded-full">Основатель</span>
+                    <h3 class="text-5xl font-serif font-bold text-dark">Мадина Усманова</h3>
+                    <p class="text-slate-600 text-lg leading-relaxed">
+                        "Я создала Broccoli как место, где не нужно выбирать между 'вкусно' и 'полезно'. Здесь вы дома, и о вашем здоровье уже позаботились."
+                    </p>
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-3 font-medium"><i data-lucide="check" class="text-brand-500"></i> Только проверенные поставщики</li>
+                        <li class="flex items-center gap-3 font-medium"><i data-lucide="check" class="text-brand-500"></i> Прозрачный состав каждого блюда</li>
+                    </ul>
+                </div>
+                <div class="order-1 lg:order-2">
+                    <div class="aspect-square rounded-full overflow-hidden shadow-2xl border-[10px] border-stone-50 w-3/4 mx-auto">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="menu" class="py-24 bg-stone-100">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 fade-up">
+                <h2 class="text-4xl font-serif font-bold text-dark mb-6">Наше Меню 2026</h2>
+                <div class="inline-flex bg-white p-1 rounded-full shadow-sm">
+                    <button class="menu-filter active px-6 py-2 rounded-full bg-dark text-white text-sm font-bold" data-filter="all">Все</button>
+                    <button class="menu-filter px-6 py-2 rounded-full text-slate-400 text-sm font-bold" data-filter="breakfast">Завтраки</button>
+                    <button class="menu-filter px-6 py-2 rounded-full text-slate-400 text-sm font-bold" data-filter="main">Основное</button>
+                    <button class="menu-filter px-6 py-2 rounded-full text-slate-400 text-sm font-bold" data-filter="bowl">Боулы</button>
+                </div>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8" id="menu-container"></div>
+        </div>
+    </section>
+
+    <section id="gallery" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end gap-6 mb-12 fade-up">
+                <div>
+                    <span class="text-brand-600 font-bold uppercase tracking-widest text-sm">Галерея</span>
+                    <h2 class="text-4xl font-serif font-bold text-dark mt-2">Атмосфера Broccoli</h2>
+                </div>
+                <div class="flex gap-4 border-b border-stone-100 pb-2">
+                    <button class="gallery-filter text-dark font-bold" onclick="filterGallery('all', this)">Все</button>
+                    <button class="gallery-filter text-slate-400 font-medium hover:text-dark" onclick="filterGallery('interior', this)">Интерьер</button>
+                    <button class="gallery-filter text-slate-400 font-medium hover:text-dark" onclick="filterGallery('food', this)">Блюда</button>
+                </div>
+            </div>
+            <div class="masonry-grid" id="gallery-grid"></div>
+        </div>
+    </section>
+
+    <section id="calculator" class="py-24 bg-dark text-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="fade-up">
+                    <h2 class="text-4xl md:text-5xl font-serif font-bold mb-6">Калькулятор КБЖУ</h2>
+                    <p class="text-slate-400 text-lg mb-8 leading-relaxed">
+                        Узнайте вашу персональную норму калорий, белков, жиров и углеводов. Мы используем формулу Миффлина-Сан Жеора — золотой стандарт современной диетологии.
+                    </p>
+                    <div class="bg-white/5 p-6 rounded-2xl border border-white/10 flex gap-4">
+                        <div class="bg-brand-500 p-3 rounded-xl h-fit"><i data-lucide="info"></i></div>
+                        <p class="text-sm text-slate-300 italic">"Правильное питание начинается с цифр, а продолжается с удовольствием от еды."</p>
+                    </div>
+                </div>
+
+                <div class="bg-white text-slate-800 rounded-[2rem] p-8 md:p-10 shadow-2xl fade-up">
+                    <div id="calc-form" class="space-y-5">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-400 uppercase mb-2">Пол</label>
+                                <div class="flex gap-2">
+                                    <button class="gender-btn flex-1 py-3 rounded-xl border-2 border-brand-500 bg-brand-500 text-white font-bold" data-value="male">М</button>
+                                    <button class="gender-btn flex-1 py-3 rounded-xl border-2 border-stone-100 bg-stone-50 text-slate-400 font-bold" data-value="female">Ж</button>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-400 uppercase mb-2">Возраст</label>
+                                <input type="number" id="age" class="w-full p-3 bg-stone-50 border border-stone-100 rounded-xl focus:ring-2 focus:ring-brand-500 font-bold" placeholder="Лет">
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-400 uppercase mb-2">Вес (кг)</label>
+                                <input type="number" id="weight" class="w-full p-3 bg-stone-50 border border-stone-100 rounded-xl focus:ring-2 focus:ring-brand-500 font-bold" placeholder="70">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-400 uppercase mb-2">Рост (см)</label>
+                                <input type="number" id="height" class="w-full p-3 bg-stone-50 border border-stone-100 rounded-xl focus:ring-2 focus:ring-brand-500 font-bold" placeholder="175">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 uppercase mb-2">Активность</label>
+                            <select id="activity" class="w-full p-3 bg-stone-50 border border-stone-100 rounded-xl font-bold">
+                                <option value="1.2">Минимум (сидячая работа)</option>
+                                <option value="1.375">Низкая (1-3 раза в неделю)</option>
+                                <option value="1.55">Средняя (3-5 раз в неделю)</option>
+                                <option value="1.725">Высокая (каждый день)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 uppercase mb-2">Ваша цель</label>
+                            <select id="goal" class="w-full p-3 bg-brand-50 border border-brand-100 rounded-xl font-bold text-brand-900">
+                                <option value="lose">Похудеть (-15% калорий)</option>
+                                <option value="maintain" selected>Поддержать текущий вес</option>
+                                <option value="gain">Набрать массу (+15% калорий)</option>
+                            </select>
+                        </div>
+                        <button onclick="calculateCalories()" class="w-full py-4 bg-brand-500 text-white rounded-xl font-bold hover:bg-brand-600 transition-all shadow-lg">Рассчитать</button>
+                    </div>
+
+                    <div id="calc-result" class="hidden text-center space-y-6 pt-4">
+                        <p class="text-sm text-slate-400 uppercase font-bold tracking-widest">Ваша норма:</p>
+                        <div class="text-6xl font-black text-brand-500 tracking-tight" id="result-calories">0</div>
+                        <p class="text-slate-400 font-medium">ккал / день</p>
+                        <div class="grid grid-cols-3 gap-2 border-t border-stone-100 pt-6">
+                            <div><p class="font-bold text-dark" id="res-protein">0</p><p class="text-[10px] text-slate-400 uppercase">Белки</p></div>
+                            <div><p class="font-bold text-dark" id="res-fat">0</p><p class="text-[10px] text-slate-400 uppercase">Жиры</p></div>
+                            <div><p class="font-bold text-dark" id="res-carb">0</p><p class="text-[10px] text-slate-400 uppercase">Углеводы</p></div>
+                        </div>
+                        <button onclick="resetCalc()" class="text-sm text-slate-400 underline">Изменить данные</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="reviews" class="py-24 bg-stone-50">
+        <div class="max-w-7xl mx-auto px-6 mb-16 text-center fade-up">
+            <h2 class="text-4xl font-serif font-bold text-dark mb-4">Отзывы гостей</h2>
+            <div class="flex justify-center gap-1 text-yellow-400"><i data-lucide="star" class="fill-current"></i><i data-lucide="star" class="fill-current"></i><i data-lucide="star" class="fill-current"></i><i data-lucide="star" class="fill-current"></i><i data-lucide="star" class="fill-current"></i></div>
+        </div>
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8 fade-up" id="reviews-grid"></div>
+    </section>
+
+    <footer class="bg-white border-t border-stone-200 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-12 mb-12">
+                <div>
+                    <a href="#" class="flex items-center gap-2 mb-4 font-bold text-xl"><i data-lucide="sprout" class="text-brand-500"></i> Broccoli</a>
+                    <p class="text-slate-400">Гастрономия будущего: честно, полезно, красиво. Мы работаем для вашего здоровья каждый день.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4 uppercase text-xs tracking-widest text-slate-400">Контакты</h4>
+                    <p class="text-dark font-bold mb-2">Tashkent City, ул. С. Азимова, 54</p>
+                    <p class="text-slate-500">+998 (71) 200-00-00</p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4 uppercase text-xs tracking-widest text-slate-400">Соцсети</h4>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-stone-50 flex items-center justify-center hover:bg-brand-500 hover:text-white transition-all"><i data-lucide="instagram"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-stone-50 flex items-center justify-center hover:bg-brand-500 hover:text-white transition-all"><i data-lucide="send"></i></a>
+                    </div>
+                </div>
+            </div>
+            <p class="text-center text-slate-300 text-sm border-t border-stone-100 pt-8">&copy; 2026 Broccoli Tashkent. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <div id="delivery-modal" class="fixed inset-0 bg-dark/80 z-[100] hidden items-center justify-center p-4 backdrop-blur-sm opacity-0 transition-opacity duration-300">
+        <div class="bg-white rounded-[2rem] max-w-md w-full p-8 relative">
+            <button onclick="closeDelivery()" class="absolute top-6 right-6 text-slate-400"><i data-lucide="x"></i></button>
+            <div class="text-center mb-8">
+                <div class="bg-brand-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 text-brand-600"><i data-lucide="bike" class="w-8 h-8"></i></div>
+                <h3 class="text-2xl font-bold text-dark">Доставка 24/7</h3>
+                <p class="text-slate-500 mt-2">Привезем заказ в любую точку города за 40 минут.</p>
+            </div>
+            <div class="space-y-3">
+                <a href="#" class="block p-4 rounded-xl border-2 border-stone-100 font-bold text-dark hover:border-brand-500 hover:bg-brand-50 transition-all">Uzum Tezkor</a>
+                <a href="#" class="block p-4 rounded-xl border-2 border-stone-100 font-bold text-dark hover:border-brand-500 hover:bg-brand-50 transition-all">Yandex Eats</a>
+                <a href="#" class="block p-4 rounded-xl border-2 border-stone-100 font-bold text-dark hover:border-brand-500 hover:bg-brand-50 transition-all text-center bg-brand-500 !text-white !border-brand-500">Broccoli Express</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Данные
+        const menuItems = [
+            { id: 1, name: "Авокадо Тост Royal", price: "75 000 сум", cat: "breakfast", cal: 320, img: "https://images.unsplash.com/photo-1541519227354-08fa5d50c44d?auto=format&fit=crop&w=600&q=80" },
+            { id: 2, name: "Боул с Киноа и Лососем", price: "95 000 сум", cat: "bowl", cal: 450, img: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80" },
+            { id: 3, name: "Стейк из Цветной Капусты", price: "65 000 сум", cat: "main", cal: 210, img: "https://images.unsplash.com/photo-1559847844-5315695dadae?auto=format&fit=crop&w=600&q=80" },
+            { id: 4, name: "Сырники из Рикотты", price: "55 000 сум", cat: "breakfast", cal: 280, img: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&fit=crop&w=600&q=80" },
+            { id: 5, name: "Зеленый Будда Боул", price: "70 000 сум", cat: "bowl", cal: 310, img: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=600&q=80" },
+            { id: 6, name: "Утиная грудка Су-вид", price: "110 000 сум", cat: "main", cal: 420, img: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=600&q=80" }
+        ];
+
+        const galleryData = [
+            { src: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80", cat: "interior", title: "Главный зал" },
+            { src: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=800&q=80", cat: "food", title: "Авторская подача" },
+            { src: "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=600&q=80", cat: "food", title: "Детокс напитки" },
+            { src: "https://images.unsplash.com/photo-1466978913421-dad938661248?auto=format&fit=crop&w=800&q=80", cat: "interior", title: "Детали декора" },
+            { src: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80", cat: "food", title: "Свежие продукты" }
+        ];
+
+        const reviews = [
+            { name: "Сардор М.", text: "Лучшее ПП в городе в 2026 году. Вкусно и честно по калориям.", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80" },
+            { name: "Камила Р.", text: "Атмосфера потрясающая. Обожаю их боулы!", img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80" },
+            { name: "Дмитрий В.", text: "Доставка очень быстрая, еда всегда теплая и красивая.", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" }
+        ];
+
+        // Инициализация
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            renderMenu('all');
+            renderGallery('all');
+            renderReviews();
+            initScrollAnim();
+        });
+
+        function renderMenu(filter) {
+            const container = document.getElementById('menu-container');
+            const items = filter === 'all' ? menuItems : menuItems.filter(i => i.cat === filter);
+            container.innerHTML = items.map(item => `
+                <div class="bg-white rounded-[2rem] p-4 shadow-sm border border-stone-100 hover:shadow-xl transition-all">
+                    <img src="${item.img}" class="w-full h-48 object-cover rounded-[1.5rem] mb-4">
+                    <div class="px-2">
+                        <span class="text-[10px] bg-brand-50 text-brand-600 px-2 py-1 rounded-md font-bold uppercase">${item.cal} ккал</span>
+                        <h3 class="font-bold text-dark mt-2">${item.name}</h3>
+                        <p class="text-xl font-black mt-2 text-brand-600">${item.price}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderGallery(filter) {
+            const grid = document.getElementById('gallery-grid');
+            const items = filter === 'all' ? galleryData : galleryData.filter(i => i.cat === filter);
+            grid.innerHTML = items.map(item => `
+                <div class="masonry-item relative group rounded-2xl overflow-hidden">
+                    <img src="${item.src}" class="w-full transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 gallery-overlay opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-6">
+                        <p class="text-white font-bold text-lg">${item.title}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterGallery(filter, btn) {
+            document.querySelectorAll('.gallery-filter').forEach(b => {
+                b.classList.remove('text-dark'); b.classList.add('text-slate-400');
+            });
+            btn.classList.add('text-dark');
+            renderGallery(filter);
+        }
+
+        // Калькулятор
+        let selectedGender = 'male';
+        document.querySelectorAll('.gender-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.gender-btn').forEach(b => {
+                    b.classList.remove('bg-brand-500', 'text-white', 'border-brand-500');
+                    b.classList.add('border-stone-100', 'text-slate-400', 'bg-stone-50');
+                });
+                btn.classList.add('bg-brand-500', 'text-white', 'border-brand-500');
+                selectedGender = btn.dataset.value;
+            });
+        });
+
+        function calculateCalories() {
+            const age = parseFloat(document.getElementById('age').value);
+            const weight = parseFloat(document.getElementById('weight').value);
+            const height = parseFloat(document.getElementById('height').value);
+            const activity = parseFloat(document.getElementById('activity').value);
+            const goal = document.getElementById('goal').value;
+
+            if (!age || !weight || !height) return alert('Заполните поля!');
+
+            let bmr = (10 * weight) + (6.25 * height) - (5 * age);
+            bmr = selectedGender === 'male' ? bmr + 5 : bmr - 161;
+            let tdee = bmr * activity;
+
+            if (goal === 'lose') tdee *= 0.85;
+            if (goal === 'gain') tdee *= 1.15;
+
+            tdee = Math.round(tdee);
+            document.getElementById('result-calories').innerText = tdee;
+            document.getElementById('res-protein').innerText = Math.round(tdee * 0.3 / 4) + 'г';
+            document.getElementById('res-fat').innerText = Math.round(tdee * 0.3 / 9) + 'г';
+            document.getElementById('res-carb').innerText = Math.round(tdee * 0.4 / 4) + 'г';
+
+            document.getElementById('calc-form').classList.add('hidden');
+            document.getElementById('calc-result').classList.remove('hidden');
+        }
+
+        function resetCalc() {
+            document.getElementById('calc-form').classList.remove('hidden');
+            document.getElementById('calc-result').classList.add('hidden');
+        }
+
+        function renderReviews() {
+            const grid = document.getElementById('reviews-grid');
+            grid.innerHTML = reviews.map(rev => `
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-stone-100">
+                    <div class="flex items-center gap-4 mb-4">
+                        <img src="${rev.img}" class="w-12 h-12 rounded-full">
+                        <h4 class="font-bold">${rev.name}</h4>
+                    </div>
+                    <p class="text-slate-500 italic">"${rev.text}"</p>
+                </div>
+            `).join('');
+        }
+
+        function openDelivery() {
+            const m = document.getElementById('delivery-modal');
+            m.classList.remove('hidden');
+            setTimeout(() => m.classList.add('opacity-100'), 10);
+        }
+
+        function closeDelivery() {
+            const m = document.getElementById('delivery-modal');
+            m.classList.remove('opacity-100');
+            setTimeout(() => m.classList.add('hidden'), 300);
+        }
+
+        function initScrollAnim() {
+            const obs = new IntersectionObserver(e => e.forEach(en => en.isIntersecting && en.target.classList.add('visible')), {threshold: 0.1});
+            document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+        }
+
+        window.addEventListener('scroll', () => {
+            const n = document.getElementById('navbar');
+            window.scrollY > 50 ? n.classList.add('py-2') : n.classList.remove('py-2');
+        });
+    </script>
+</body>
+</html>
